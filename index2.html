@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ação Comunidade</title>
+
+    <link rel="stylesheet" href="acaocomunidade.css">
+</head>
+
+<body>
+
+    <a href="#principal" class="saltar">Saltar para o conteúdo</a>
+
+    <header>
+        <h1>Ação Comunidade</h1>
+
+        <nav aria-label="Navegação principal">
+            <a href="index2.html" aria-current="page">Início</a>
+            <a href="sobre.html">Sobre nós</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </header>
+
+    <main id="principal" tabindex="-1">
+
+        <div id="conteudo">
+
+            <!-- SEÇÃO PRINCIPAL -->
+            <section aria-labelledby="titulo-quem-somos">
+
+                <h2 id="titulo-quem-somos">Quem somos</h2>
+
+                <p>
+                    Somos uma organização não governamental dedicada a promover
+                    ações sociais e contribuir para uma sociedade melhor.
+                </p>
+
+                <!-- BADGES -->
+                <div class="badges">
+                    <span class="badge badge-ativo">Projeto ativo</span>
+                    <span class="badge badge-voluntario">Voluntariado</span>
+                    <span class="badge badge-novo">Novo projeto</span>
+                </div>
+
+                <picture>
+                    <source type="image/webp"
+                            srcset="Imagens/voluntarios-480.webp 480w,
+                                    Imagens/voluntarios-800.webp 800w,
+                                    Imagens/voluntarios-1000.webp 1000w"
+                            sizes="(max-width: 576px) calc(100vw - 82px), 500px">
+                    <img src="Imagens/voluntarios.jpg"
+                         alt="Voluntários da ONG realizando uma ação social"
+                         width="500" height="333">
+                </picture>
+
+            </section>
+
+            <!-- CONTATO -->
+            <section aria-labelledby="titulo-contato">
+
+                <h2 id="titulo-contato">Entre em contato</h2>
+
+                <p>
+                    <strong>E-mail:</strong>
+                    contato@ong.org
+                </p>
+
+                <p>
+                    <strong>Telefone:</strong>
+                    (32) 99999-9999
+                </p>
+
+                <p>
+                    <strong>Endereço:</strong>
+                    Juiz de Fora - MG
+                </p>
+
+                <!-- AVISO -->
+                <aside class="alerta" aria-label="Informação">
+                    <strong>Informação</strong>
+                    Nossa equipe está disponível para receber
+                    dúvidas, sugestões e novos voluntários.
+                </aside>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Ação Comunidade</p>
+    </footer>
+
+    <script type="module" src="javascript/estudo.js"></script>
+
+</body>
+
+</html>
