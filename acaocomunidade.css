@@ -1,0 +1,572 @@
+/* =========================
+   DESIGN SYSTEM
+========================= */
+
+:root {
+
+    color-scheme: light dark;
+
+    /* CORES BASE */
+    --verde: #2E7D32;
+    --verde-escuro: #1B5E20;
+    --verde-claro: #66BB6A;
+    --azul: #1565C0;
+    --amarelo: #FFC107;
+    --vermelho: #C62828;
+    --branco: #FFFFFF;
+    --cinza-claro: #F5F5F5;
+    --cinza: #BDBDBD;
+    --cinza-escuro: #616161;
+    --preto: #212121;
+
+    /* CORES SEMÂNTICAS (modo claro, o padrão) */
+    --bg-pagina: var(--cinza-claro);
+    --bg-cartao: var(--branco);
+    --bg-campo: #FFFFFF;
+    --bg-mensagem: var(--cinza-claro);
+    --bg-alerta: #E8F5E9;
+    --bg-cabecalho: var(--verde);
+    --bg-rodape: var(--verde-escuro);
+    --bg-botao: var(--verde);
+    --bg-botao-hover: var(--verde-escuro);
+    --texto: var(--preto);
+    --texto-alerta: var(--verde-escuro);
+    --texto-cabecalho: var(--branco);
+    --texto-botao: var(--branco);
+    --titulo: var(--verde-escuro);
+    --hover-nav-bg: var(--verde-escuro);
+    --hover-nav-texto: var(--branco);
+    --borda: var(--cinza);
+    --borda-campo: #757575;
+    --borda-largura: 1px;
+    --borda-alerta: var(--verde);
+    --ok: var(--verde);
+    --erro: var(--vermelho);
+    --foco: #0D47A1;
+    --foco-cabecalho: var(--amarelo);
+
+    /* TIPOGRAFIA */
+    --fonte: Arial, sans-serif;
+    --tamanho-h1: 32px;
+    --tamanho-h2: 28px;
+    --tamanho-h3: 24px;
+    --tamanho-h4: 20px;
+    --tamanho-texto: 16px;
+
+    /* ESPAÇAMENTO - BASE 8px */
+    --espaco-1: 8px;
+    --espaco-2: 16px;
+    --espaco-3: 24px;
+    --espaco-4: 32px;
+    --espaco-5: 40px;
+}
+
+/* =========================
+   MODO ESCURO (automático)
+========================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-pagina: #121212;
+        --bg-cartao: #1E1E1E;
+        --bg-campo: #2B2B2B;
+        --bg-mensagem: #2A2A2A;
+        --bg-alerta: #1B3A1F;
+        --bg-cabecalho: var(--verde-escuro);
+        --bg-rodape: #0B2E0F;
+        --texto: #F2F2F2;
+        --texto-alerta: #C8E6C9;
+        --titulo: #81C784;
+        --hover-nav-bg: var(--verde);
+        --borda: #444444;
+        --borda-campo: #9E9E9E;
+        --ok: #81C784;
+        --erro: #EF9A9A;
+        --foco: #FFD54F;
+    }
+}
+
+/* =========================
+   ALTO CONTRASTE
+   (prevalece sobre o modo escuro)
+========================= */
+
+@media (prefers-contrast: more) {
+    :root {
+        --bg-pagina: #000000;
+        --bg-cartao: #000000;
+        --bg-campo: #000000;
+        --bg-mensagem: #000000;
+        --bg-alerta: #000000;
+        --bg-cabecalho: #000000;
+        --bg-rodape: #000000;
+        --bg-botao: #FFFF00;
+        --bg-botao-hover: #FFFFFF;
+        --texto: #FFFFFF;
+        --texto-alerta: #FFFFFF;
+        --texto-botao: #000000;
+        --titulo: #FFFF00;
+        --hover-nav-bg: #FFFF00;
+        --hover-nav-texto: #000000;
+        --borda: #FFFFFF;
+        --borda-campo: #FFFFFF;
+        --borda-largura: 2px;
+        --borda-alerta: #FFFFFF;
+        --ok: #00FF7F;
+        --erro: #FF6B6B;
+        --foco: #00FFFF;
+        --foco-cabecalho: #00FFFF;
+    }
+
+    header,
+    footer {
+        border: 2px solid #FFFFFF;
+    }
+
+    nav a {
+        text-decoration: underline;
+    }
+}
+
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--fonte);
+    font-size: var(--tamanho-texto);
+    line-height: 1.6;
+    color: var(--texto);
+    background-color: var(--bg-pagina);
+}
+
+/* =========================
+   ACESSIBILIDADE
+========================= */
+
+/* Link "Saltar para o conteúdo": oculto até receber foco */
+.saltar {
+    position: absolute;
+    left: -9999px;
+}
+
+.saltar:focus {
+    left: var(--espaco-1);
+    top: var(--espaco-1);
+    z-index: 100;
+
+    background-color: #FFFFFF;
+    color: #000000;
+
+    padding: var(--espaco-1) var(--espaco-2);
+}
+
+/* Foco visível para navegação por teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--foco);
+    outline-offset: 3px;
+}
+
+/* O main recebe foco programático (após o salto) sem contorno */
+main:focus {
+    outline: none;
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+/* =========================
+   HEADER + FLEXBOX
+========================= */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--bg-cabecalho);
+    color: var(--texto-cabecalho);
+
+    padding: var(--espaco-3);
+}
+
+header h1 {
+    font-size: var(--tamanho-h1);
+    margin: 0;
+}
+
+/* =========================
+   MENU
+========================= */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-2);
+}
+
+nav a {
+    color: var(--texto-cabecalho);
+    text-decoration: none;
+
+    padding: var(--espaco-1);
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background-color: var(--hover-nav-bg);
+    color: var(--hover-nav-texto);
+    border-radius: 4px;
+}
+
+nav a:focus-visible {
+    outline: 3px solid var(--foco-cabecalho);
+}
+
+/* Página atual */
+nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* =========================
+   ÁREA PRINCIPAL
+========================= */
+
+main {
+    max-width: 1200px;
+
+    margin: var(--espaco-5) auto;
+
+    padding: 0 var(--espaco-2);
+}
+
+/* =========================
+   GRID 12 COLUNAS
+========================= */
+
+#conteudo {
+    display: grid;
+
+    grid-template-columns: repeat(12, 1fr);
+
+    gap: var(--espaco-3);
+
+    width: 100%;
+}
+
+/* =========================
+   SEÇÕES / CARDS
+========================= */
+
+section {
+    grid-column: span 6;
+
+    background-color: var(--bg-cartao);
+
+    padding: var(--espaco-3);
+
+    border: var(--borda-largura) solid var(--borda);
+    border-radius: 8px;
+}
+
+section h2 {
+    font-size: var(--tamanho-h2);
+
+    color: var(--titulo);
+
+    margin-top: 0;
+}
+
+/* =========================
+   IMAGEM
+========================= */
+
+section img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+
+    display: block;
+
+    margin-top: var(--espaco-3);
+
+    border-radius: 8px;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badges {
+    display: flex;
+
+    gap: var(--espaco-1);
+
+    flex-wrap: wrap;
+
+    margin-top: var(--espaco-2);
+}
+
+.badge {
+    padding: 4px 12px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.badge-ativo {
+    background-color: var(--verde-claro);
+    color: var(--preto);
+}
+
+.badge-voluntario {
+    background-color: var(--azul);
+    color: var(--branco);
+}
+
+.badge-novo {
+    background-color: var(--amarelo);
+    color: var(--preto);
+}
+
+/* =========================
+   ALERTA
+========================= */
+
+.alerta {
+    padding: var(--espaco-2);
+
+    margin-top: var(--espaco-3);
+
+    background-color: var(--bg-alerta);
+
+    color: var(--texto-alerta);
+
+    border-left: 5px solid var(--borda-alerta);
+
+    border-radius: 4px;
+}
+
+.alerta strong {
+    display: block;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--espaco-1);
+}
+
+form input,
+form textarea {
+    width: 100%;
+
+    padding: var(--espaco-1);
+
+    border: 1px solid var(--borda-campo);
+
+    border-radius: 4px;
+
+    background-color: var(--bg-campo);
+
+    color: var(--texto);
+
+    font-family: var(--fonte);
+
+    font-size: var(--tamanho-texto);
+}
+
+form textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+form button {
+    margin-top: var(--espaco-1);
+
+    padding: var(--espaco-1);
+
+    border: none;
+
+    border-radius: 4px;
+
+    background-color: var(--bg-botao);
+
+    color: var(--texto-botao);
+
+    font-size: var(--tamanho-texto);
+
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: var(--bg-botao-hover);
+}
+
+/* =========================
+   ESTADOS DOS CAMPOS
+========================= */
+
+.campo-valido {
+    border: 2px solid var(--ok) !important;
+}
+
+.campo-invalido {
+    border: 2px solid var(--erro) !important;
+}
+
+/* =========================
+   FEEDBACK DO FORMULÁRIO
+========================= */
+
+.sucesso {
+    color: var(--titulo);
+
+    font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--bg-rodape);
+
+    color: var(--texto-cabecalho);
+
+    padding: var(--espaco-3);
+}
+
+footer p {
+    margin: 0;
+}
+
+/* =========================
+   HISTÓRICO DE MENSAGENS
+========================= */
+
+#historico {
+    margin-top: var(--espaco-4);
+}
+
+#historico h3 {
+    color: var(--titulo);
+}
+
+.mensagem-salva {
+    margin-top: var(--espaco-2);
+
+    padding: var(--espaco-2);
+
+    background-color: var(--bg-mensagem);
+
+    border-left: 4px solid var(--ok);
+
+    border-radius: 4px;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+/* Até 1400px */
+
+@media (max-width: 1400px) {
+
+    main {
+        max-width: 1100px;
+    }
+}
+
+/* Até 1200px */
+
+@media (max-width: 1200px) {
+
+    main {
+        max-width: 950px;
+    }
+}
+
+/* Até 992px */
+
+@media (max-width: 992px) {
+
+    section {
+        grid-column: span 12;
+    }
+}
+
+/* Até 768px */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+
+        gap: var(--espaco-2);
+
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    #conteudo {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    section {
+        grid-column: span 6;
+    }
+
+}
+
+/* Até 576px */
+
+@media (max-width: 576px) {
+
+    header h1 {
+        font-size: var(--tamanho-h2);
+    }
+
+    main {
+        margin: var(--espaco-3) auto;
+    }
+
+    #conteudo {
+        display: block;
+    }
+
+    section {
+        margin-bottom: var(--espaco-3);
+    }
+}
